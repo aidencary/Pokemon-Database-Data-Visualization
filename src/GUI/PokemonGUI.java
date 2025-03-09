@@ -37,6 +37,11 @@ public class PokemonGUI {
             columnModel.getColumn(i).setPreferredWidth(columnWidths[i]);
         }
 
+        // Apply custom renderer for type columns
+        table.getColumnModel().getColumn(2).setCellRenderer(new TypeColorRenderer()); // Type 1
+        table.getColumnModel().getColumn(3).setCellRenderer(new TypeColorRenderer()); // Type 2
+
+
         JScrollPane scrollPane = new JScrollPane(table);
         frame.add(scrollPane);
 
