@@ -9,13 +9,13 @@ import java.util.List;
 
 public class PokemonGUI {
     public PokemonGUI(List<Pokemon> pokeList) {
-        final int frameWidth = 914;
+        final int frameWidth = 924;
         final int frameHeight = 600;
 
         JFrame frame = new JFrame("PokeApp");
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
 
-        String[] columns = {"Pokedex ID", "Name", "Primary Type", "Secondary Type", "Base Stats", "HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed", "Gen", "Legendary"};
+        String[] columns = {"ID", "Name", "Primary Type", "Secondary", "Base Stats", "HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed", "Gen", "Legendary"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -32,7 +32,7 @@ public class PokemonGUI {
         TableColumnModel columnModel = table.getColumnModel();
 
         // Adjust column widths
-        int[] columnWidths = {40, 150, 80, 80, 50, 50, 60, 60, 60, 60, 60, 50, 80};
+        int[] columnWidths = {40, 150, 80, 90, 50, 50, 60, 60, 60, 60, 60, 50, 80};
         for (int i = 0; i < columnWidths.length; i++) {
             columnModel.getColumn(i).setPreferredWidth(columnWidths[i]);
         }
