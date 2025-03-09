@@ -15,7 +15,7 @@ public class PokemonGUI {
         JFrame frame = new JFrame("PokeApp");
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
 
-        String[] columns = {"ID", "Name", "Primary Type", "Secondary", "Base Stats", "HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed", "Gen", "Legendary"};
+        String[] columns = {"ID", "Name", "Primary Type", "Secondary", "Base", "HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed", "Gen", "Legendary"};
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

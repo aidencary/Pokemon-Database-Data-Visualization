@@ -23,7 +23,7 @@ public class PokeApp {
         // Console Output
         System.out.println("1st Pokemon: " + pokeList.get(0));
         System.out.println("10th Pokemon: " + pokeList.get(9));
-        System.out.println("Total Pokemon including Megas (From Gen 1 to Gen 6): " + pokeList.size() );
+        System.out.println("Total Pokemon Including Megas and Alt Forms (From Gen 1 to Gen 6): " + pokeList.size() );
 
         // GUI
         SwingUtilities.invokeLater(() -> new PokemonGUI(pokeList));
