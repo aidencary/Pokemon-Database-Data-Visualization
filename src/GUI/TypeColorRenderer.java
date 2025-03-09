@@ -12,7 +12,7 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
     static {
         // Used AI to generate the colors
         typeColors.put("Fire", Color.RED);
-        typeColors.put("Water", Color.BLUE);
+        typeColors.put("Water", new Color(173, 247, 255));
         typeColors.put("Grass", Color.GREEN);
         typeColors.put("Electric", Color.YELLOW);
         typeColors.put("Ice", Color.CYAN);
