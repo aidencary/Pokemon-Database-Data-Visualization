@@ -11,20 +11,22 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
 
     static {
         // Used AI to generate the colors
-        typeColors.put("Fire", Color.RED);
+        typeColors.put("Fire", new Color(219, 26, 26));
+        //typeColors.put("Fire", Color.RED);
         typeColors.put("Water", new Color(173, 247, 255));
-        typeColors.put("Grass", Color.GREEN);
+        typeColors.put("Grass", new Color(144, 238, 144));
         typeColors.put("Electric", Color.YELLOW);
         typeColors.put("Ice", Color.CYAN);
         typeColors.put("Fighting", new Color(184, 69, 45));
-        typeColors.put("Poison", new Color(153, 51, 153));
+        typeColors.put("Poison", new Color(177, 156, 217));
         typeColors.put("Ground", new Color(181, 140, 83));
         typeColors.put("Flying", new Color(135, 206, 250));
         typeColors.put("Psychic", new Color(255, 105, 180));
         typeColors.put("Bug", new Color(154, 205, 50));
-        typeColors.put("Rock", new Color(169, 169, 169));
+        typeColors.put("Rock", new Color(115, 115, 115));
         typeColors.put("Ghost", new Color(123, 104, 238));
-        typeColors.put("Dragon", new Color(75, 0, 100));
+        //typeColors.put("Dragon", new Color(75, 0, 100));
+        typeColors.put("Dragon", new Color(102, 86, 133));
         typeColors.put("Dark", new Color(90, 90, 90));
         typeColors.put("Steel", new Color(192, 192, 192));
         typeColors.put("Fairy", new Color(255, 182, 193));
