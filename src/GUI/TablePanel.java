@@ -15,16 +15,72 @@ public class TablePanel extends JPanel {
     private DefaultTableModel model;
     private DetailsPanel detailsPanel;
     private TableRowSorter<DefaultTableModel> sorter;
+    private JComboBox<String> typeFilter;
+    private JComboBox<String> generationFilter;
+    private JCheckBox legendaryFilter;
+
 
     public TablePanel(List<Pokemon> pokemonList) {
         setLayout(new BorderLayout());
         initializeTableModel();
+        initializeFilters();
         populateTable(pokemonList);
         initializeTableSorter();
         setupSelectionListener(pokemonList);
         setupColumnWidths();
         addResetButton();
         add(new JScrollPane(table), BorderLayout.CENTER);
+    }
+
+    private void initializeFilters() {
+        JPanel filterPanel = new JPanel();
+        filterPanel.setLayout(new FlowLayout());
+
+        typeFilter = new JComboBox<>(new String[]{"All", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting", "Poison", "Ground",
+                "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"});
+        legendaryFilter = new JCheckBox("Show Only Legendary");
+        generationFilter = new JComboBox<>(new String[]{"All", "Generation 1", "Generation 2", "Generation 3", "Generation 4", "Generation 5", "Generation 6"});
+
+        typeFilter.addActionListener(e -> applyFilters());
+        legendaryFilter.addActionListener(e -> applyFilters());
+        generationFilter.addActionListener(e -> applyFilters());
+
+        filterPanel.add(new JLabel("Filter by Type:"));
+        filterPanel.add(typeFilter);
+        filterPanel.add(legendaryFilter);
+        filterPanel.add(new JLabel("Filter by Generation:"));
+        filterPanel.add(generationFilter);
+
+        add(filterPanel, BorderLayout.NORTH);
+    }
+
+    private void applyFilters() {
+        //List<Pokemon> filteredList = getFilteredList(pokemonList); // Filter data
+        //updateTable(filteredList); // Update table with filtered data
+        String selectedType = (String) typeFilter.getSelectedItem();
+        boolean showOnlyLegendary = legendaryFilter.isSelected();
+        String selectedGeneration = (String) generationFilter.getSelectedItem();
+
+        sorter.setRowFilter(new RowFilter<DefaultTableModel, Integer>() {
+            @Override
+            public boolean include(Entry<? extends DefaultTableModel, ? extends Integer> entry) {
+                String type1 = (String) entry.getValue(1);
+                String type2 = (String) entry.getValue(2);
+                boolean isLegendary = (boolean) entry.getValue(8);
+                String generation = (String) entry.getValue(9);
+
+                if (!selectedType.equals("All") && !type1.equals(selectedType) && !type2.equals(selectedType)) {
+                    return false;
+                }
+                if (showOnlyLegendary && !isLegendary) {
+                    return false;
+                }
+                if (!selectedGeneration.equals("All") && !generation.equals(selectedGeneration)) {
+                    return false;
+                }
+                return true;
+            }
+        });
     }
 
     private void initializeTableModel() {
@@ -43,6 +99,25 @@ public class TablePanel extends JPanel {
         for (Pokemon p : pokemonList) {
             model.addRow(new Object[]{p.name(), p.type1(), p.type2(), p.hp(), p.attack(), p.defense(), p.spAtk(), p.spDef(), p.speed()});
         }
+    }
+
+    private List<Pokemon> getFilteredList(List<Pokemon> pokemonList) {
+        return pokemonList.stream().filter(p -> {
+            String selectedType = (String) typeFilter.getSelectedItem();
+            boolean showOnlyLegendary = legendaryFilter.isSelected();
+            String selectedGeneration = (String) generationFilter.getSelectedItem();
+
+            if (!selectedType.equals("All") && !p.type1().equals(selectedType) && !p.type2().equals(selectedType)) {
+                return false;
+            }
+            if (showOnlyLegendary && !p.legendary()) {
+                return false;
+            }
+            if (!selectedGeneration.equals("All") && !p.generation().equals(selectedGeneration)) {
+                return false;
+            }
+            return true;
+        }).toList();
     }
 
     private void initializeTableSorter() {
