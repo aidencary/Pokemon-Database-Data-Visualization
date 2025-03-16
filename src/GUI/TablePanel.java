@@ -23,6 +23,7 @@ public class TablePanel extends JPanel {
         initializeTableSorter();
         setupSelectionListener(pokemonList);
         setupColumnWidths();
+        addResetButton();
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
 
@@ -54,8 +55,14 @@ public class TablePanel extends JPanel {
         sorter.setComparator(0, Comparator.comparing(o -> (String) o));
         sorter.setComparator(1, Comparator.comparing(o -> (String) o));
         sorter.setComparator(2, Comparator.comparing(o -> (String) o, (a, b) -> {
-            if (a.equals("None")) return -1; // Move single-type Pokémon to the bottom
-            if (b.equals("None")) return 1;
+            boolean aIsNone = a.equals("None");
+            boolean bIsNone = b.equals("None");
+
+            // Keep "None" always at the bottom
+            if (aIsNone && bIsNone) return 0; // Both are "None", keep same order
+            if (aIsNone) return 1; // Move "None" to the bottom
+            if (bIsNone) return -1; // Move "None" to the bottom
+
             return a.compareTo(b); // Alphabetical sorting for dual-type Pokémon
         }));
     }
@@ -77,6 +84,17 @@ public class TablePanel extends JPanel {
         }
         table.getColumnModel().getColumn(1).setCellRenderer(new TypeColorRenderer());
         table.getColumnModel().getColumn(2).setCellRenderer(new TypeColorRenderer());
+    }
+
+    private void resetSorting() {
+        sorter.setSortKeys(null); // Removes any active sorting
+        table.getTableHeader().repaint(); // Refreshes the header to reflect no sorting
+    }
+
+    public void addResetButton() {
+        JButton resetButton = new JButton("Reset");
+        resetButton.addActionListener(e -> resetSorting());
+        add(resetButton, BorderLayout.SOUTH); // Adds button at the bottom of the panel
     }
 
     public void setDetailsPanel(DetailsPanel detailsPanel) {

@@ -8,8 +8,8 @@ import java.util.List;
 
 public class PokemonGUI {
     public PokemonGUI(List<Pokemon> pokeList) {
-        final int frameWidth = 900;
-        final int frameHeight = 600;
+        final int frameWidth = 695;
+        final int frameHeight = 800;
 
         JFrame frame = new JFrame("PokéApp");
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));

@@ -12,7 +12,6 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
     static {
         // Used AI to generate the colors
         typeColors.put("Fire", new Color(219, 26, 26));
-        //typeColors.put("Fire", Color.RED);
         typeColors.put("Water", new Color(173, 247, 255));
         typeColors.put("Grass", new Color(144, 238, 144));
         typeColors.put("Electric", Color.YELLOW);
@@ -25,7 +24,6 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
         typeColors.put("Bug", new Color(154, 205, 50));
         typeColors.put("Rock", new Color(115, 115, 115));
         typeColors.put("Ghost", new Color(123, 104, 238));
-        //typeColors.put("Dragon", new Color(75, 0, 100));
         typeColors.put("Dragon", new Color(102, 86, 133));
         typeColors.put("Dark", new Color(90, 90, 90));
         typeColors.put("Steel", new Color(192, 192, 192));
