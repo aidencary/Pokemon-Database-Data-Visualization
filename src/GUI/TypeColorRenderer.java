@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TypeColorRenderer  extends DefaultTableCellRenderer {
+    // A HashMap of each type and their corresponding color
     private static final Map<String, Color> typeColors = new HashMap<>();
-
     static {
         // Used AI to generate the colors
         typeColors.put("Fire", new Color(219, 26, 26));
@@ -30,6 +30,7 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
         typeColors.put("Fairy", new Color(255, 182, 193));
     }
 
+    // Sets each type1 and/or type2 cell to it's corresponding color
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
@@ -41,6 +42,7 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
         return cell;
     }
 
+    // Returns typeColors Map
     public static Map<String, Color> getTypeColors() {
         return typeColors;
     }
