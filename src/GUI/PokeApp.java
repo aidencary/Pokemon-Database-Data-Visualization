@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
 public class PokeApp {
 
     public static void main(String[] args) {
-        String filePath = "src/Data/pokemon.csv";
+        String filePath = "src/Data/updatedPokemon.csv";
         List<Pokemon> pokeList =  loadPokemon(filePath);
         if (pokeList.isEmpty()) {
-            System.out.println("No Pokemon Found");
+            System.out.println("No Pokémon Found");
             return;
         }
 
         // Console Output
-        System.out.println("1st Pokemon: " + pokeList.get(0));
-        System.out.println("10th Pokemon: " + pokeList.get(9));
-        System.out.println("Total Pokemon Including Megas and Alt Forms (From Gen 1 to Gen 6): " + pokeList.size() );
+        System.out.println("1st Pokémon: " + pokeList.get(0));
+        System.out.println("10th Pokémon: " + pokeList.get(9));
+        System.out.println("Total Pokémon Including Megas and Alt Forms (From Gen 1 to Gen 6): " + pokeList.size() );
 
         // GUI
         SwingUtilities.invokeLater(() -> new PokemonGUI(pokeList));

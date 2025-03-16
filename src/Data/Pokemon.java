@@ -1,6 +1,6 @@
 package Data;
 
-public record Pokemon(int id, String name, String type1, String type2, int total, int hp, int attack, int defense, int spAtk, int spDef, int speed, int generation, boolean legendary) {
+public record Pokemon(int id, String name, String type1, String type2, int total, int hp, int attack, int defense, int spAtk, int spDef, int speed, String generation, boolean legendary) {
     public Pokemon(String[] data) {
         this(
                 Integer.parseInt(data[0]),
@@ -14,7 +14,7 @@ public record Pokemon(int id, String name, String type1, String type2, int total
                 Integer.parseInt(data[8]),
                 Integer.parseInt(data[9]),
                 Integer.parseInt(data[10]),
-                Integer.parseInt(data[11]),
+                data[11],
                 Boolean.parseBoolean(data[12])
         );
     }
