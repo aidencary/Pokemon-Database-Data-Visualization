@@ -40,4 +40,9 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
         }
         return cell;
     }
+
+    public static Map<String, Color> getTypeColors() {
+        return typeColors;
+    }
+
 }
