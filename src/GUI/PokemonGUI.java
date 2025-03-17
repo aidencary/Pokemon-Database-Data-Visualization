@@ -13,7 +13,10 @@ public class PokemonGUI {
 
     public PokemonGUI(List<Pokemon> pokeList) {
 
+        // Create frame and image icon
         JFrame frame = new JFrame("PokéApp");
+        ImageIcon icon = new ImageIcon("src/GUI/pokeIcon.png");
+        frame.setIconImage(icon.getImage());
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
 
         frame.setLayout(new BorderLayout());
