@@ -101,10 +101,11 @@ public class StatsPanel extends JPanel {
         statsBuilder.append(formatStat("Speed", pokemonList, Pokemon::speed));
         statsBuilder.append(formatStat("Total", pokemonList, Pokemon::total));
 
-        // Append new stats
+        // Append stats for # of single and dual type Pokemon
         statsBuilder.append("\nSingle-Type Pokémon: ").append(String.format("%.2f%%", singleTypePercentage));
         statsBuilder.append("\nDual-Type Pokémon: ").append(String.format("%.2f%%", dualTypePercentage));
 
+        // Append stats for # of Pokemon and # of legendary Pokemon for each generation
         statsBuilder.append("\n\nPokémon Count by Generation:\n").append(generationStats);
         statsBuilder.append("\n\nLegendary Pokémon by Generation:\n").append(legendaryStats);
 

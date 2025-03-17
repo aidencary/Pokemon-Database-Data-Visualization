@@ -28,13 +28,14 @@ public class TypeColorRenderer  extends DefaultTableCellRenderer {
         typeColors.put("Dark", new Color(90, 90, 90));
         typeColors.put("Steel", new Color(192, 192, 192));
         typeColors.put("Fairy", new Color(255, 182, 193));
+        typeColors.put("Normal", new Color(255, 255, 255));
     }
 
     // Sets each type1 and/or type2 cell to it's corresponding color
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (value != null) {
+        if (value != null) { // If the value is not null, set to the corresponding color of the type
             Color c = typeColors.getOrDefault(value.toString(), Color.WHITE);
             cell.setBackground(c);
             cell.setForeground(Color.BLACK);
