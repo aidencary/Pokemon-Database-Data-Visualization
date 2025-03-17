@@ -1,6 +1,6 @@
 # ◓ Pokémon Visualizer
 
-![PokeApp Logo](https://raw.githubusercontent.com/your-username/your-repo/main/path-to-image.png)
+![PokeApp Logo](DALL·E 2025-03-16 20.01.41 - A high-quality digital illustration of a classic Poké Ball with the text 'PokeApp' written across its center. The design should be sleek, modern, and .webp)
 
 ## 📌 Overview
 
