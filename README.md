@@ -65,3 +65,9 @@ Users can filter Pokémon using:
 - Click on a Pokémon to view more details.
 - Click a column header to sort Pokémon.
 - Use filters (dropdowns and checkboxes) to refine results.
+
+---
+📝 **Author:** *Aiden Cary*  
+📅 **Last Updated:** *March 2025*  
+🤖 **AI Assistance:** Some parts of this project were developed with guidance from **ChatGPT**.
+
