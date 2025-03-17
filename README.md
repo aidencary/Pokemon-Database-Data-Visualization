@@ -1,5 +1,7 @@
 # ◓ Pokémon Visualizer
 
+![PokeApp Logo](https://raw.githubusercontent.com/your-username/your-repo/main/path-to-image.png)
+
 ## 📌 Overview
 
 **Pokémon Visualizer** is a Java-based application that reads Pokémon data from a CSV file and presents it in a **graphical user interface (GUI)**. The application allows users to **view, filter, sort, and analyze** Pokémon statistics. It also includes **color-coded type visualizations**, **statistical summaries**, and a **pie chart** of Pokémon type distribution.
