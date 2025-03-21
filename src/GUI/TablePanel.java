@@ -32,14 +32,13 @@ public class TablePanel extends JPanel {
     private JComboBox<String> typeFilter;
     private JComboBox<String> generationFilter;
     private JCheckBox legendaryFilter;
-    private List<Pokemon> fullPokemonData; // Stores all Pokémon for filtering
     private DetailsPanel detailsPanel;
 
     public TablePanel(List<Pokemon> pokemonList) {
         setLayout(new BorderLayout());
-        fullPokemonData = new ArrayList<>(pokemonList); // Store all Pokémon data
+        //fullPokemonData = new ArrayList<>(pokemonList); // Store all Pokémon data
         initializeTableModel();
-        initializeFilters();
+        initializeFilters(pokemonList);
         populateTable(pokemonList);
         initializeTableSorter();
         setupSelectionListener(pokemonList);
@@ -49,7 +48,7 @@ public class TablePanel extends JPanel {
     }
 
     // Initializes all filter comboBoxes and checkBoxes with action listeners and adds them to the panel
-    private void initializeFilters() {
+    private void initializeFilters(List<Pokemon> pokemonList) {
         // Create panel
         JPanel filterPanel = new JPanel();
         filterPanel.setLayout(new FlowLayout());
@@ -61,9 +60,9 @@ public class TablePanel extends JPanel {
         legendaryFilter = new JCheckBox(SHOW_LEGENDARY);
 
         // Add action listeners for combo boxes and check box
-        typeFilter.addActionListener(e -> applyFilters());
-        generationFilter.addActionListener(e -> applyFilters());
-        legendaryFilter.addActionListener(e -> applyFilters());
+        typeFilter.addActionListener(e -> applyFilters(pokemonList));
+        generationFilter.addActionListener(e -> applyFilters(pokemonList));
+        legendaryFilter.addActionListener(e -> applyFilters(pokemonList));
 
         // Add panels
         filterPanel.add(new JLabel("Filter by Type:"));
@@ -75,7 +74,7 @@ public class TablePanel extends JPanel {
     }
 
     // Filter implementation
-    private void applyFilters() {
+    private void applyFilters(List<Pokemon> pokemonList) {
         // Put selected type and generation into a string and legendary value into a boolean
         String selectedType = (String) typeFilter.getSelectedItem();
         String selectedGeneration = (String) generationFilter.getSelectedItem();
@@ -87,7 +86,7 @@ public class TablePanel extends JPanel {
         // Clear the table model before repopulating
         model.setRowCount(0);
 
-        for (Pokemon p : fullPokemonData) {
+        for (Pokemon p : pokemonList) {
             // Extract only the generation number (e.g., "1 (Red Blue and Yellow)" → "1")
             String pokemonGenNumber = p.generation().split(" ")[0];
 
@@ -125,9 +124,6 @@ public class TablePanel extends JPanel {
 
     // Creates the list of Pokemon and populates the table
     private void populateTable(List<Pokemon> pokemonList) {
-        fullPokemonData.clear(); // Clear any existing data
-        fullPokemonData.addAll(pokemonList); // Store full data for filtering
-
         for (Pokemon p : pokemonList) {
             // Add only visible columns to the table model
             model.addRow(new Object[]{p.name(), p.type1(), p.type2(), p.hp(), p.attack(), p.defense(), p.spAtk(), p.spDef(), p.speed()});

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PokemonGUI {
     // Integer constants
-    final int FRAME_WIDTH = 1460;
+    final int FRAME_WIDTH = 1482;
     final int FRAME_HEIGHT = 910;
 
     public PokemonGUI(List<Pokemon> pokeList) {
