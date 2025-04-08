@@ -1,9 +1,11 @@
 package GUI;
 
 import Data.Pokemon;
+import Filter.FilterObserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Displays statistics for the filtered list of Pokémon using a custom font.
  */
-public class StatsPanel extends JPanel {
+public class StatsPanel extends JPanel implements FilterObserver {
     // String constants
     public static final String HEADER_FORMAT = "Total Pokémon: %d\nLegendary Pokémon: %d (%.2f%%)\n\nType Distribution:\n%s\n\n";
     public static final String STAT_LINE_FORMAT = "%s - Min: %d, Avg: %.2f, Max: %d\n";
@@ -112,4 +114,10 @@ public class StatsPanel extends JPanel {
         double avgStat = pokemonList.stream().mapToInt(statFunction).average().orElse(0);
         return String.format(STAT_LINE_FORMAT, statName, minStat, avgStat, maxStat);
     }
+
+    @Override
+    public void onFilterUpdate(List<Pokemon> filteredList) {
+        updateStats(filteredList); // or updateChart(filteredList) in TypeChartPanel
+    }
+
 }

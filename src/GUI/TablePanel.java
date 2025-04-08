@@ -1,6 +1,7 @@
 package GUI;
 
 import Data.Pokemon;
+import Filter.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -37,11 +38,9 @@ public class TablePanel extends JPanel {
     private DetailsPanel detailsPanel;
     private TypeChartPanel typeChartPanel;
     private ListSelectionListener rowSelectionListener;
-    private List<Pokemon> fullPokemonData;
+    private List<FilterObserver> observers = new ArrayList<>();
 
     public TablePanel(List<Pokemon> pokemonList) {
-        //this.fullPokemonData = new ArrayList<>(pokemonList); // Store unfiltered data
-
         setLayout(new BorderLayout());
         initializeTableModel();         // Setup the table and its columns
         initializeFilters(pokemonList);            // Setup filter controls
@@ -91,37 +90,34 @@ public class TablePanel extends JPanel {
         String selectedType = (String) typeFilter.getSelectedItem();
         String selectedGeneration = (String) generationFilter.getSelectedItem();
         boolean showOnlyLegendary = legendaryFilter.isSelected();
-        String selectedGenNumber = selectedGeneration.equals("All") ? "All" : selectedGeneration.split(" ")[1];
+        //String selectedGenNumber = selectedGeneration.equals("All") ? "All" : selectedGeneration.split(" ")[1];
 
-        List<Pokemon> filtered = new ArrayList<>();
-        model.setRowCount(0); // Clear current table rows
+        // Create strategy list
+        List<PokemonFilterStrategy> filters = new ArrayList<>();
+        if (!selectedType.equals("All")) filters.add(new TypeFilter(selectedType));
+        if (!selectedGeneration.equals("All")) filters.add(new GenerationFilter(selectedGeneration.split(" ")[1]));
+        if (showOnlyLegendary) filters.add(new LegendaryFilter());
 
-        // Filter Pokémon based on user-selected criteria
-        for (Pokemon p : pokemonList) {
-            String genNumber = p.generation().split(" ")[0];
+        // Apply strategies
+        List<Pokemon> filtered = FilterUtils.applyFilters(pokemonList, filters);
 
-            if (!selectedType.equals("All") && !p.type1().equals(selectedType) && !p.type2().equals(selectedType)) continue;
-            if (showOnlyLegendary && !p.legendary()) continue;
-            if (!selectedGenNumber.equals("All") && !genNumber.equals(selectedGenNumber)) continue;
-
-            model.addRow(new Object[]{p.name(), p.type1(), p.type2(), p.hp(), p.attack(), p.defense(), p.spAtk(), p.spDef(), p.speed()});
-            filtered.add(p);
+        // Clear and repopulate table
+        model.setRowCount(0);
+        for (Pokemon p : filtered) {
+            model.addRow(new Object[]{p.name(), p.type1(), p.type2(),
+                    p.hp(), p.attack(), p.defense(), p.spAtk(), p.spDef(), p.speed()});
         }
 
-        // Update statistics panel with filtered data
-        if (statsPanel != null) {
-            statsPanel.updateStats(filtered);
-        }
+        // Update connected panels (optional legacy updates)
+        if (detailsPanel != null) setupSelectionListener(filtered);
 
-        // Update type chart panel with filtered data
-        if (typeChartPanel != null) {
-            typeChartPanel.updateChart(filtered);
-        }
+        // Notify observer panels
+        notifyObservers(filtered);
 
-        // Update details panel to match filtered Pokémon list
-        if (detailsPanel != null) {
-            setupSelectionListener(filtered);
-        }
+        // Update stats and type chart
+        if (statsPanel != null) statsPanel.updateStats(filtered);
+        if (typeChartPanel != null) typeChartPanel.updateChart(filtered);
+        if (detailsPanel != null) setupSelectionListener(filtered);
     }
 
     // Sets up the columns for the table
@@ -241,4 +237,17 @@ public class TablePanel extends JPanel {
         // Add it to the model
         table.getSelectionModel().addListSelectionListener(rowSelectionListener);
     }
+
+    // Adds a FilterObserver
+    public void addFilterObserver(FilterObserver observer) {
+        observers.add(observer);
+    }
+
+    // Notifies the observer when a filter is applied
+    private void notifyObservers(List<Pokemon> filteredList) {
+        for (FilterObserver o : observers) {
+            o.onFilterUpdate(filteredList);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package GUI;
 
 import Data.Pokemon;
+import Filter.FilterObserver;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -26,7 +27,7 @@ import static org.jfree.chart.ChartFactory.createPieChart;
  * and scroll until you see these libraries
  */
 
-class TypeChartPanel extends JPanel {
+class TypeChartPanel extends JPanel implements FilterObserver {
     // Integer constants
     public static final int DIMENSION_WIDTH = 400;
     public static final int DIMENSION_HEIGHT = 400;
@@ -79,4 +80,10 @@ class TypeChartPanel extends JPanel {
 
         typeCounts.forEach(dataset::setValue);
     }
+
+    @Override
+    public void onFilterUpdate(List<Pokemon> filteredList) {
+        updateChart(filteredList); // or updateChart(filteredList) in TypeChartPanel
+    }
+
 }

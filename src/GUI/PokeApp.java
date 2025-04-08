@@ -3,6 +3,7 @@ package GUI;
 import Data.Pokemon;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,6 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PokeApp {
+    // Integer constants
+    public static final int FRAME_WIDTH = 1552;
+    public static final int FRAME_HEIGHT = 860;
     public static final String filePath = "src/Data/updatedPokemon.csv";
 
     public static void main(String[] args) {
@@ -26,7 +30,7 @@ public class PokeApp {
         consoleOutput(pokeList);
 
         // GUI
-        SwingUtilities.invokeLater(() -> new PokemonGUI(pokeList));
+        SwingUtilities.invokeLater(() -> startGUI(pokeList));
 
     }
 
@@ -49,6 +53,41 @@ public class PokeApp {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+
+    private static void startGUI(List<Pokemon> pokeList) {
+        // Create frame and icon
+        JFrame frame = new JFrame("PokéApp");
+        ImageIcon icon = new ImageIcon("src/GUI/pokeIcon.png");
+        frame.setIconImage(icon.getImage());
+        frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
+        frame.setLayout(new BorderLayout());
+
+        // Panels
+        TablePanel tablePanel = new TablePanel(pokeList);
+        StatsPanel statsPanel = new StatsPanel(pokeList);
+        DetailsPanel detailsPanel = new DetailsPanel();
+        TypeChartPanel chartPanel = new TypeChartPanel(pokeList);
+
+        // Observer registration
+        tablePanel.addFilterObserver(detailsPanel);
+        tablePanel.addFilterObserver(statsPanel);
+        tablePanel.addFilterObserver(chartPanel);
+
+        // Link panels
+        tablePanel.setStatsPanel(statsPanel);
+        tablePanel.setDetailsPanel(detailsPanel);
+        tablePanel.setTypeChartPanel(chartPanel);
+
+        // Add to frame
+        frame.add(tablePanel, BorderLayout.CENTER);
+        frame.add(detailsPanel, BorderLayout.SOUTH);
+        frame.add(statsPanel, BorderLayout.EAST);
+        frame.add(chartPanel, BorderLayout.WEST);
+
+        // Size frame size
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setVisible(true);
     }
 
 }

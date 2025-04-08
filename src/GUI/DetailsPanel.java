@@ -1,14 +1,16 @@
 package GUI;
 
 import Data.Pokemon;
+import Filter.FilterObserver;
 
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
-public class DetailsPanel extends JPanel {
+public class DetailsPanel extends JPanel implements FilterObserver {
     // JTextPane to display details about the selected Pokémon
     private JTextPane detailsPane;
 
@@ -55,4 +57,14 @@ public class DetailsPanel extends JPanel {
             return new Font("SansSerif", Font.BOLD, 16); // Fallback font
         }
     }
+
+    @Override
+    public void onFilterUpdate(List<Pokemon> filteredList) {
+        if (!filteredList.isEmpty()) {
+            updateDetails(filteredList.get(0));
+        } else {
+            updateDetails(null);
+        }
+    }
+
 }
