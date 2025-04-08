@@ -1,4 +1,4 @@
-package GUI;
+package Filter;
 
 import Data.Pokemon;
 
