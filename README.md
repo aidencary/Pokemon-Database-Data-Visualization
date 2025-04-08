@@ -11,7 +11,7 @@ This project demonstrates the use of:
 - **Streams and Collections API** for data processing
 - **JFreeChart** for chart visualization
 - **Custom Renderers** for table styling
-
+- **Strategy and Observer Design Patterns** for clean, extensible architecture
 ---
 
 ## 🛠 Features
@@ -45,8 +45,15 @@ This project demonstrates the use of:
   - The Pokémon table
   - The statistics summary
   - The type distribution chart
-
+*Filters are combined and processed using FilterUtils, ensuring modular and reusable logic.
 ---
+
+.
+
+### 🔁 **Observer Pattern Integration**
+- GUI panels (StatsPanel, TypeChartPanel, DetailsPanel) implement the FilterObserver interface.
+- TablePanel acts as the publisher, notifying all observers after a filter change.
+- This design ensures loose coupling and automatic updates across all views.
 
 ## 🔧 Installation & Setup
 
@@ -82,6 +89,6 @@ This project demonstrates the use of:
 
 ---
 📝 **Author:** *Aiden Cary*  
-📅 **Last Updated:** *March 2025*  
+📅 **Last Updated:** *April 2025*  
 🤖 **AI Assistance:** Some parts of this project were developed with guidance from **ChatGPT**.
 

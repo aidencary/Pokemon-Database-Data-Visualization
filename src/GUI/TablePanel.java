@@ -41,7 +41,7 @@ public class TablePanel extends JPanel {
     private List<FilterObserver> observers = new ArrayList<>();
 
     public TablePanel(List<Pokemon> pokemonList) {
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout()); // Set panel layout
         initializeTableModel();         // Setup the table and its columns
         initializeFilters(pokemonList);            // Setup filter controls
         populateTable(pokemonList); // Populate with all Pokémon

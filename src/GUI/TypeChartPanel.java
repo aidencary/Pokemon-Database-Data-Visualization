@@ -81,6 +81,8 @@ class TypeChartPanel extends JPanel implements FilterObserver {
         typeCounts.forEach(dataset::setValue);
     }
 
+
+    // Updates the chart panel when a filter is applied
     @Override
     public void onFilterUpdate(List<Pokemon> filteredList) {
         updateChart(filteredList); // or updateChart(filteredList) in TypeChartPanel

@@ -18,7 +18,6 @@ public class PokeApp {
     public static final String filePath = "src/Data/updatedPokemon.csv";
 
     public static void main(String[] args) {
-
         // Creates a List of Pokemon
         List<Pokemon> pokeList =  loadPokemon(filePath);
         if (pokeList.isEmpty()) {
@@ -55,6 +54,7 @@ public class PokeApp {
         }
     }
 
+    // Used to set window and all panels along with their observers
     private static void startGUI(List<Pokemon> pokeList) {
         // Create frame and icon
         JFrame frame = new JFrame("PokéApp");

@@ -27,9 +27,11 @@ public class StatsPanel extends JPanel implements FilterObserver {
     public static final int NUM_OF_ROWS = 10;
     public static final int NUM_OF_COLUMNS = 35;
 
+    // Text area of the stats panel
     private final JTextArea statsArea;
 
     public StatsPanel(List<Pokemon> pokemonList) {
+        // Set Panel
         setLayout(new BorderLayout());
 
         // Create and format the stats display area
@@ -38,6 +40,7 @@ public class StatsPanel extends JPanel implements FilterObserver {
         statsArea.setFont(loadCustomFont()); // Set custom font
         statsArea.setForeground(Color.BLACK);
 
+        // Add the panel
         add(new JScrollPane(statsArea), BorderLayout.CENTER);
 
         updateStats(pokemonList); // Display initial stats
@@ -115,9 +118,10 @@ public class StatsPanel extends JPanel implements FilterObserver {
         return String.format(STAT_LINE_FORMAT, statName, minStat, avgStat, maxStat);
     }
 
+    // Updates the stats panel whenever a filter is applied
     @Override
     public void onFilterUpdate(List<Pokemon> filteredList) {
-        updateStats(filteredList); // or updateChart(filteredList) in TypeChartPanel
+        updateStats(filteredList);
     }
 
 }

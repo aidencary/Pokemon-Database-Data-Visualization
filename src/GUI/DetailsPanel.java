@@ -58,6 +58,7 @@ public class DetailsPanel extends JPanel implements FilterObserver {
         }
     }
 
+    // Allows the detail panel to react when a filter is applied
     @Override
     public void onFilterUpdate(List<Pokemon> filteredList) {
         if (!filteredList.isEmpty()) {
