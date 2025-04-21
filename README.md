@@ -50,10 +50,17 @@ This project demonstrates the use of:
 
 .
 
+### 🧩 **Strategy Pattern Integration**
+- The project employs the Strategy Pattern for applying filters, encapsulating filter logic in separate classes. These filters are utilized by the FilterUtils class for modular and reusable logic.
+- This pattern allows you to define multiple filtering strategies (e.g., by type, legendary status, generation) independently.
+- It promotes extensibility, making it easy to add new filter types in the future without modifying existing code.
+
 ### 🔁 **Observer Pattern Integration**
 - GUI panels (StatsPanel, TypeChartPanel, DetailsPanel) implement the FilterObserver interface.
 - TablePanel acts as the publisher, notifying all observers after a filter change.
+- Ensures loose coupling between the data source (TablePanel) and the dependent components (StatsPanel, TypeChartPanel, DetailsPanel).
 - This design ensures loose coupling and automatic updates across all views.
+
 
 ## 🔧 Installation & Setup
 
